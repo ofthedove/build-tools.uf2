@@ -1,8 +1,16 @@
 uf2conv_tools_mkfile_path:=$(abspath $(lastword $(MAKEFILE_LIST)))
 uf2conv_tools_current_path:=$(patsubst %/,%,$(dir $(uf2conv_tools_mkfile_path)))
 
-# As far as I can tell there isn't a way to run python without installing it, so we'll just assume the user has python3 installed
-PYTHON:=python3
+# Prefer python3 if installed. Fallback to python 2.
+# It would be preferable to include python as a submodule, but unfortunately python isn't portable
+ifneq (, $(shell which python3 ))
+   PYTHON:=python3
+else ifneq (, $(shell which python ))
+   PYTHON:=python
+else
+  $(error "Python must be installed to generate UF2 files!")
+endif
+
 UF2PATH:=$(uf2conv_tools_current_path)/uf2
 UF2CONV:=$(UF2PATH)/utils/uf2conv.py
 
