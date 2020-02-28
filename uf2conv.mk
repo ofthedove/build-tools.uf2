@@ -4,7 +4,7 @@ uf2conv_tools_current_path:=$(patsubst %/,%,$(dir $(uf2conv_tools_mkfile_path)))
 # As far as I can tell there isn't a way to run python without installing it, so we'll just assume the user has python3 installed
 PYTHON:=python3
 UF2PATH:=$(uf2conv_tools_current_path)/uf2
-UF2CONV:=UF2PATH/utils/uf2conv.py
+UF2CONV:=$(UF2PATH)/utils/uf2conv.py
 
 # Takes an elf file and makes a BIN
 # $1 objcopy location
